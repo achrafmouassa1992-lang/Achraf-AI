@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>أشرف AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101827;color:white;font-family:Arial,sans-serif;padding:20px}
+header{text-align:center;padding:24px 0}
+.logo{font-size:48px}
+h1{margin:8px;color:#60a5fa}
+p{color:#cbd5e1;line-height:1.7}
+.card{background:#1e293b;padding:18px;border-radius:16px;margin:16px 0}
+textarea,input{width:100%;padding:14px;border-radius:10px;border:1px solid #475569;background:#0f172a;color:white;font-size:16px;margin:8px 0}
+button{border:0;border-radius:10px;padding:13px;background:#2563eb;color:white;font-size:16px;margin:5px;cursor:pointer}
+button.secondary{background:#334155}
+#result{white-space:pre-wrap;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🤖</div>
+<h1>أشرف AI</h1>
+<p>مساعدك الذكي، بين يديك</p>
+</header>
+<div class="card">
+<h3>✍️ مساعد الكتابة</h3>
+<textarea id="task" rows="4" placeholder="اكتب ما تريد تحضيره أو صياغته..."></textarea>
+<button onclick="prepare()">تحضير النص</button>
+<button class="secondary" onclick="clearAll()">مسح</button>
+</div>
+<div class="card">
+<h3>📋 النتيجة</h3>
+<div id="result">ستظهر النتيجة هنا.</div>
+<button onclick="copyText()">نسخ النتيجة</button>
+</div>
+<div class="card">
+<h3>⚡ الملء التلقائي</h3>
+<p>حضّر المعلومات هنا ثم انسخها إلى الخانات التي تريد تعبئتها. الملء التلقائي داخل التطبيقات الأخرى يحتاج إلى صلاحيات وميزة أندرويد مخصصة.</p>
+<input id="name" placeholder="الاسم">
+<input id="email" placeholder="البريد الإلكتروني">
+<button onclick="makeInfo()">تجهيز المعلومات للنسخ</button>
+</div>
+<script>
+function prepare(){
+let t=document.getElementById('task').value.trim();
+document.getElementById('result').textContent=t||'اكتب طلبك أولاً.';
+}
+function clearAll(){
+document.getElementById('task').value='';
+document.getElementById('result').textContent='ستظهر النتيجة هنا.';
+}
+function copyText(){
+let t=document.getElementById('result').textContent;
+if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>alert('تم النسخ'))}
+else alert('حدد النص وانسخه يدوياً');
+}
+function makeInfo(){
+document.getElementById('result').textContent=
+'الاسم: '+document.getElementById('name').value+
+'\nالبريد الإلكتروني: '+document.getElementById('email').value;
+}
+</script>
+</body>
+</html>
